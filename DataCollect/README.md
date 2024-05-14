@@ -14,7 +14,7 @@ To get transforms.json used in Instant-ngp, we need following steps:
 Modified_step
 1. create a new directory that you want to store the current images and tracking information.
 2. run `python ../utils/world_center_retreive.py` to get the world center.
-3. run `python ../camera_stream_ndi_tracking.py` to capture images of object and the current tracking position.
+3. run `python ../utils/camera_stream_ndi_tracking.py` to capture images of object and the current tracking position.
 4. run `python ../utils/world_center_extrinsic_mapping.py` to add frames.
 
 ## Getting started
