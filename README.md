@@ -1,5 +1,6 @@
 ﻿# ARthroNeRF_view_synthesis
 This repository contains the code for our exploratory work on integrating Instant NeRF (Neural Radiance Fields) and an Optical Tracking System.
+![ARthroNeRF Overview](overview_header_image (1).png)
 ## Usage
 ### Data Collection
 To start collecting data, navigate to the `DataCollected` directory and follow the instructions there.
