@@ -2,6 +2,7 @@ from sksurgerynditracker.nditracker import NDITracker
 import pickle
 import numpy as np
 
+# Change Rom Path based on your marker array
 ROM_PATH = "C:/Users/camp/Documents/Xinrui Zou/tracking_array_v3.rom"
 
 SETTINGS = {

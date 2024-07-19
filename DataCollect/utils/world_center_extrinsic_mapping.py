@@ -113,32 +113,7 @@ def process_frames(tracker_file, camera2robot_file, world_center):
                 "transform_matrix": transform_matrix.tolist()
             })
     ###########################################################################  
-    ### change orientation
-    # up = up / np.linalg.norm(up)
-    # print("up vector was", up)
-    # R = rotmat(up,[0,0,1]) # rotate up vector to [0,0,1]
-    # R = np.pad(R,[0,1])
-    # R[-1, -1] = 1
     nframes = len(frames)
-    # for f in frames:
-    #     f["transform_matrix"] = np.matmul(R, f["transform_matrix"]) # rotate up to be the z axis
-    #     # find a central point they are all looking at
-    #     print("computing center of attention...")
-    #     totw = 0.0
-    #   totp = np.array([0.0, 0.0, 0.0])
-    # for f in frames:
-    #     mf = f["transform_matrix"][0:3,:]
-    #     for g in frames:
-    #         mg = g["transform_matrix"][0:3,:]
-    #         p, w = closest_point_2_lines(mf[:,3], mf[:,2], mg[:,3], mg[:,2])
-    #         if w > 0.00001:
-    #             totp += p*w
-    #             totw += w
-    # if totw > 0.0:
-    #     totp /= totw
-    # print(totp) # the cameras are looking at totp
-    # for f in frames:
-    #     f["transform_matrix"][0:3,3] -= np.array([0.0, 0.0, 0.0])
 
     avglen = 0.
     for f in frames:
@@ -152,12 +127,7 @@ def process_frames(tracker_file, camera2robot_file, world_center):
 
     for f in frames:
         f["transform_matrix"] = f["transform_matrix"].tolist()
-    # # ##### postprocess-info totp avglen
-    # # ##### postprocess-R R
-    # with open('postprocess-R.pkl', 'wb') as f:
-    #     pickle.dump(R, f)
-    # with open('postprocess-info.pkl', 'wb') as f:
-    #     pickle.dump([totp, avglen], f)
+
 
     with open('postprocess-info.pkl', 'wb') as f:
         pickle.dump([avglen], f)
@@ -224,11 +194,7 @@ def TransToJson(matrix, distortion, imgH, imgW, aabb_scale, is_fisheye, frames, 
 
 
 if __name__ == "__main__":
-    # matrix = np.array([[471.32480599,   0.00000000e+00, 319.6930523 ],
-    #         [0.00000000e+00, 473.00882149, 244.39997145],
-    #         [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]], dtype=np.float64)
-    # distortion = np.array([[ 4.67626869e-03, 6.27888081e-02, 8.77125257e-04, 2.36776524e-04, -2.60426004e-01]])
-
+    ## Change intrisic matrix based on your camera
     matrix = np.array([[467.9830497,   0.00000000e+00, 320.6389447 ],
             [0.00000000e+00, 466.87870617, 246.68071929],
             [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]], dtype=np.float64)
@@ -239,7 +205,6 @@ if __name__ == "__main__":
     is_fisheye = False
     aabb_scale = 4
     tracker_file = './pivot.csv'
-    # camera2robot_file = '../camera_calibration/handeye_matrix_new_2.csv'
     camera2robot_file = '../handeye-v2/handeye_matrix.csv'
     outpath = 'transforms.json'
     world_center_file = 'world_center.pkl'
